@@ -1,0 +1,14 @@
+{
+  "name": "nightfall-domain-intel-api",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-09-16",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "PAYMENTS_ENABLED": "true",
+    "X402_RECEIVER": "0xf77f3C9e6BC9Cd0eE1A2943813b6eC57f1305Ab3",
+    "X402_FACILITATOR_URL": "https://facilitator.payai.network",
+    "X402_NETWORK": "eip155:8453",
+    "X402_HEALTH_PRICE": "$0.005",
+    "X402_DEEP_PRICE": "$0.03"
+  }
+}
