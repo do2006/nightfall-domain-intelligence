@@ -9,12 +9,12 @@ export interface AppDeps{
 }
 
 const openApi={openapi:'3.1.0',info:{title:'NightFall Domain Intelligence',version:'0.1.0'},paths:{
- '/domain/health':{post:{summary:'Domain health posture',requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{domain:{type:'string'}},required:['domain']}}}}}},
- '/domain/deep':{post:{summary:'Deep domain posture',requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{domain:{type:'string'}},required:['domain']}}}}}},
+ '/domain/health':{post:{summary:'Domain health posture',responses:{'402':{description:'Payment required'}},'x-payment-info':{protocols:['x402'],price:{mode:'fixed',currency:'USD',amount:'0.005'}},requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{domain:{type:'string'}},required:['domain']}}}}}},
+ '/domain/deep':{post:{summary:'Deep domain posture',responses:{'402':{description:'Payment required'}},'x-payment-info':{protocols:['x402'],price:{mode:'fixed',currency:'USD',amount:'0.03'}},requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{domain:{type:'string'}},required:['domain']}}}}}},
 }};
-const manifest={version:'1',network:'eip155:8453',payment:'Circle USDC',resources:[
- {method:'POST',path:'/domain/health',price:'$0.005'},
- {method:'POST',path:'/domain/deep',price:'$0.03'},
+const manifest={version:1,resources:[
+ 'https://nightfall-domain-intel-api.planet-teacher.workers.dev/domain/health',
+ 'https://nightfall-domain-intel-api.planet-teacher.workers.dev/domain/deep',
 ]};
 
 async function domainFromRequest(c:Context){
