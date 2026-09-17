@@ -26,6 +26,7 @@ async function domainFromRequest(c:Context){
 export function createApp(deps:AppDeps){
  const app=new Hono();
  app.use('*',async(c,next)=>{c.header('Access-Control-Allow-Origin','*');c.header('Access-Control-Allow-Methods','GET,POST,OPTIONS');c.header('Access-Control-Allow-Headers','content-type,payment-signature,x-payment');c.header('Access-Control-Expose-Headers','payment-required,payment-response,x-payment-response');if(c.req.method==='OPTIONS')return c.body(null,204);await next();});
+ app.get('/',c=>c.json({service:'NightFall Domain Intelligence',network:'Base',asset:'USDC',resources:[{method:'POST',path:'/domain/health',price:'0.005 USDC'},{method:'POST',path:'/domain/deep',price:'0.03 USDC'}]}));
  app.get('/health',c=>c.json({ok:true,service:'nightfall-domain-intelligence',version:'0.1.0'}));
  app.get('/demo',c=>c.json({domain:'example.com',purpose:'deterministic DNS, HTTPS, mail and security-header posture'}));
  app.get('/openapi.json',c=>c.json(openApi));

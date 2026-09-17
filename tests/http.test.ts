@@ -11,6 +11,11 @@ describe('HTTP API',()=>{
   expect((await app.request('/health')).status).toBe(200);
   expect((await app.request('/demo')).status).toBe(200);
  });
+ it('serves discovery at the public root',async()=>{
+  const app=createApp({collect:async()=>evidence,resolveDmarc:async()=>[]});
+  const r=await app.request('/'); expect(r.status).toBe(200);
+  expect(await r.json()).toMatchObject({service:'NightFall Domain Intelligence',network:'Base',asset:'USDC'});
+ });
  it('returns a health report for a domain',async()=>{
   const app=createApp({collect:async()=>evidence,resolveDmarc:async()=>[]});
   const r=await app.request('/domain/health',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({domain:'example.com'})});
